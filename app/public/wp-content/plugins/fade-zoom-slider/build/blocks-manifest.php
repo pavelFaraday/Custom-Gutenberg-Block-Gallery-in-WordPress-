@@ -16,6 +16,14 @@ return array(
 		'supports' => array(
 			'html' => false
 		),
+		'attributes' => array(
+			'images' => array(
+				'type' => 'array',
+				'default' => array(
+					
+				)
+			)
+		),
 		'textdomain' => 'fade-zoom-slider',
 		'editorScript' => 'file:./index.js',
 		'editorStyle' => 'file:./index.css',
