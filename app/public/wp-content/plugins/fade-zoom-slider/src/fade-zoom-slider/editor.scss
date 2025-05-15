@@ -9,4 +9,11 @@
 	.slide {
 		opacity: 1;
 	}
+	.remove-fade-slider-img.is-destructive {
+		position: absolute;
+		bottom: 1em;
+		right: 1em;
+		background: rgb(241, 101, 101);
+		color: #fff;
+	}
 }

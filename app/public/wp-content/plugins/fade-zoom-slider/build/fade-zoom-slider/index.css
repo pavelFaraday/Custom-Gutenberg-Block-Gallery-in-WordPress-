@@ -12,5 +12,12 @@
 .wp-block-elliottrichmond-fade-zoom-slider .slide {
   opacity: 1;
 }
+.wp-block-elliottrichmond-fade-zoom-slider .remove-fade-slider-img.is-destructive {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+  background: rgb(241, 101, 101);
+  color: #fff;
+}
 
 /*# sourceMappingURL=index.css.map*/

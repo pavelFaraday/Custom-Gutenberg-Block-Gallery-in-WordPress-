@@ -37,7 +37,10 @@ import './editor.scss';
 export default function Edit({attributes, setAttributes}) {
 	const { images } = attributes;
 	const ALLOWED_MEDIA_TYPES = [ 'image' ];
-	console.log(images);
+	const removeImage = (index) => {
+		const newImages = images.filter((img, i) => i !== index);
+		setAttributes({ images: newImages });
+	}
 	
 	return (
 		<div { ...useBlockProps() }>
@@ -59,10 +62,13 @@ export default function Edit({attributes, setAttributes}) {
 					)}
 				/>
 			</MediaUploadCheck>
-			
+
 			{images.map((img, index) => (
 				<div className='slide'>
 					<img src={img.url} alt={img.alt} />
+					<Button className='remove-fade-slider-img' isDestructive onClick={() => removeImage(index)}>
+						Remove
+					</Button>
 				</div>
 			))}
 		</div>
