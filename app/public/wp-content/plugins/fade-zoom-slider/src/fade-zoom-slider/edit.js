@@ -39,7 +39,6 @@ export default function Edit({attributes, setAttributes}) {
 	const ALLOWED_MEDIA_TYPES = [ 'image' ];
 	console.log(images);
 	
-
 	return (
 		<div { ...useBlockProps() }>
 			<MediaUploadCheck>
@@ -60,6 +59,12 @@ export default function Edit({attributes, setAttributes}) {
 					)}
 				/>
 			</MediaUploadCheck>
+			
+			{images.map((img, index) => (
+				<div className='slide'>
+					<img src={img.url} alt={img.alt} />
+				</div>
+			))}
 		</div>
 	);
 }

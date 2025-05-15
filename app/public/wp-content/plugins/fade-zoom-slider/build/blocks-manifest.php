@@ -14,7 +14,12 @@ return array(
 			
 		),
 		'supports' => array(
-			'html' => false
+			'html' => false,
+			'align' => true,
+			'dimensions' => array(
+				'aspectRatio' => true,
+				'minHeight' => true
+			)
 		),
 		'attributes' => array(
 			'images' => array(
