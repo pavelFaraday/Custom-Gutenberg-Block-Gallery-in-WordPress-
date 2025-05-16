@@ -33,10 +33,42 @@ import './editor.scss';
 
 
 
+// 📌 setAttributes: This is how you update that data.
+// 📌 attributes: This holds the data for your block (like the list of images).
 
-export default function Edit({attributes, setAttributes}) {
-	const { images } = attributes;
-	const ALLOWED_MEDIA_TYPES = [ 'image' ];
+/* 📌 `const removeImage = (index) => { ... }`
+This function lets you remove an image by its position in the list.
+It filters out the image that matches the clicked index.
+Then it updates the images with the new list.
+*/
+
+
+
+/* 📌 `useBlockProps()`
+This adds default block wrapper props, like styling and block ID, from WordPress. It’s like saying, “Hey WordPress, this is a block!”
+
+In simple terms:
+👉 useBlockProps() is a WordPress helper function that gives your block the necessary HTML properties (like className, style, data-*) so it looks and behaves correctly inside the block editor.
+
+🧩 Why do you need it? Think of WordPress blocks like Lego pieces. Each block needs:
+
+- A specific shape (CSS class)
+- An identity (HTML attributes)
+- Editor styling hooks
+
+Without those, your block:
+- May not display styles properly
+- Might not be selectable or draggable
+- Won’t work well with other blocks
+
+So useBlockProps() gives your block the standard "Lego connectors" to fit nicely with the others in the editor.
+
+*/
+
+
+export default function Edit({attributes, setAttributes}) {  
+	const { images } = attributes;               // 📌 This pulls the images data (an array of image objects) out of your block’s saved data.
+	const ALLOWED_MEDIA_TYPES = [ 'image' ];     // 📌  Only allows images (not videos, PDFs, etc.) in the media uploader.
 	const removeImage = (index) => {
 		const newImages = images.filter((img, i) => i !== index);
 		setAttributes({ images: newImages });
@@ -44,16 +76,16 @@ export default function Edit({attributes, setAttributes}) {
 	
 	return (
 		<div { ...useBlockProps() }>
-			<MediaUploadCheck>
-				<MediaUpload
-					onSelect={ ( media ) =>
+			 <MediaUploadCheck>                           {/* 📌 MediaUploadCheck: Makes sure the user has permission to upload. */}
+				 <MediaUpload                             {/* 📌 MediaUpload: The actual media library interface. */}
+					onSelect={ ( media ) =>               // onSelect: Runs when the user selects images. It updates the block’s image list.
 						setAttributes({images: media})
 					}
-					allowedTypes={ ALLOWED_MEDIA_TYPES }
-					multiple
-					addToGallery
-					gallery
-					value={ images.map((img) => img.id) }
+					allowedTypes={ ALLOWED_MEDIA_TYPES } 
+					multiple                              // 📌 multiple: Allows selecting multiple images at once.
+					addToGallery				          // 📌 addToGallery: Adds selected images to the existing gallery.
+					gallery 					          // 📌 gallery: Indicates that the selected images are part of a gallery
+					value={ images.map((img) => img.id) }   // 📌 value: Tells WordPress which images are selected (based on img.id).
 					render={ ( { open } ) => (
 						<Button 
 							variant='primary'
