@@ -66,6 +66,12 @@ So useBlockProps() gives your block the standard "Lego connectors" to fit nicely
 */
 
 
+/* 
+📌 MediaUploadCheck: Makes sure the user has permission to upload.
+📌 MediaUpload: The actual media library interface. 
+*/
+
+
 export default function Edit({attributes, setAttributes}) {  
 	const { images } = attributes;               // 📌 This pulls the images data (an array of image objects) out of your block’s saved data.
 	const ALLOWED_MEDIA_TYPES = [ 'image' ];     // 📌  Only allows images (not videos, PDFs, etc.) in the media uploader.
@@ -76,9 +82,9 @@ export default function Edit({attributes, setAttributes}) {
 	
 	return (
 		<div { ...useBlockProps() }>
-			 <MediaUploadCheck>                           {/* 📌 MediaUploadCheck: Makes sure the user has permission to upload. */}
-				 <MediaUpload                             {/* 📌 MediaUpload: The actual media library interface. */}
-					onSelect={ ( media ) =>               // onSelect: Runs when the user selects images. It updates the block’s image list.
+			 <MediaUploadCheck>                          
+				 <MediaUpload                            
+					onSelect={ ( media ) =>               // 📌 onSelect: Runs when the user selects images. It updates the block’s image list.
 						setAttributes({images: media})
 					}
 					allowedTypes={ ALLOWED_MEDIA_TYPES } 
