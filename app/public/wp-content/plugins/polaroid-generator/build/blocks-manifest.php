@@ -13,6 +13,12 @@ return array(
 		'example' => array(
 			
 		),
+		'attributes' => array(
+			'photos' => array(
+				'type' => 'number',
+				'default' => 6
+			)
+		),
 		'supports' => array(
 			'html' => false
 		),
