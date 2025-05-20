@@ -15,7 +15,12 @@
 		}
 	},
 	"supports": {
-		"html": false
+		"html": false,
+		"align": [ "wide", "full" ],
+		"color": {
+			"background": true,
+			"text": false
+		}
 	},
 	"textdomain": "polaroid-generator",
 	"editorScript": "file:./index.js",

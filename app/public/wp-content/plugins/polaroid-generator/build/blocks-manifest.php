@@ -20,7 +20,15 @@ return array(
 			)
 		),
 		'supports' => array(
-			'html' => false
+			'html' => false,
+			'align' => array(
+				'wide',
+				'full'
+			),
+			'color' => array(
+				'background' => true,
+				'text' => false
+			)
 		),
 		'textdomain' => 'polaroid-generator',
 		'editorScript' => 'file:./index.js',
