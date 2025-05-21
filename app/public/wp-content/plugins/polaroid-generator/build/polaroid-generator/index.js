@@ -66,7 +66,7 @@ function Edit({
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Photos', 'polaroid-generator'),
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Photos", "polaroid-generator"),
           value: photos,
           onChange: newCount => setAttributes({
             photos: newCount
@@ -75,7 +75,7 @@ function Edit({
           max: 12
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
           className: "description",
-          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Choose the number of photos to display.', 'polaroid-generator')
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Choose the number of photos to display.", "polaroid-generator")
         })]
       })
     })]
