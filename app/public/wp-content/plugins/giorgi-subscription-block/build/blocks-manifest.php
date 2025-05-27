@@ -8,7 +8,7 @@ return array(
 		'version' => '0.1.0',
 		'title' => 'my subscribtion block',
 		'category' => 'text',
-		'icon' => 'palmtree',
+		'icon' => 'email',
 		'description' => 'Example block scaffolded with Create Block tool.',
 		'example' => array(
 			
