@@ -128,7 +128,7 @@ function Edit({
             tagName: "p",
             value: attributes.justtext,
             placeholder: "Type some text here...",
-            allowedFormats: ["core/bold", "core/italic"],
+            allowedFormats: ["core/bold", "core/italic", "core/link"],
             onChange: justtext => setAttributes({
               justtext
             })
