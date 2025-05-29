@@ -10,13 +10,53 @@ return array(
 		'category' => 'text',
 		'icon' => 'email',
 		'description' => 'Example block scaffolded with Create Block tool.',
+		'textdomain' => 'giorgi-subscription-block',
 		'example' => array(
 			
 		),
 		'supports' => array(
-			'html' => false
+			'html' => true,
+			'align' => array(
+				'wide'
+			),
+			'color' => array(
+				'text' => false,
+				'background' => true
+			),
+			'anchor' => true
 		),
-		'textdomain' => 'giorgi-subscription-block',
+		'attributes' => array(
+			'titletext' => array(
+				'type' => 'string',
+				'selector' => 'h3',
+				'default' => 'Take 10% off your first order',
+				'source' => 'text'
+			),
+			'btntext' => array(
+				'type' => 'string',
+				'selector' => 'button',
+				'default' => 'Subscribe',
+				'source' => 'text'
+			),
+			'justtext' => array(
+				'type' => 'string',
+				'selector' => 'p',
+				'default' => 'Become a subscriber to get instantly 10% off your first purchase.',
+				'source' => 'html'
+			),
+			'list_id' => array(
+				'type' => 'string'
+			),
+			'doubleoptin' => array(
+				'type' => 'boolean'
+			),
+			'image' => array(
+				'type' => 'object',
+				'default' => array(
+					'id' => 0
+				)
+			)
+		),
 		'editorScript' => 'file:./index.js',
 		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style-index.css',
