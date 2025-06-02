@@ -1,13 +1,15 @@
 {
-	"apiVersion": 2,
-	"name": "sub/firstblock",
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "create-block/gutenberg-block-starter",
 	"version": "0.1.0",
-	"title": "First Block",
+	"title": "Gutenberg Block Starter",
 	"category": "common",
+	"icon": "smiley",
 	"description": "My first block in Gutenberg.",
+	"example": {},
 	"supports": {
-		"html": false,
-		"anchor": true
+		"html": false
 	},
 	"attributes": {
 		"content": {
@@ -19,8 +21,9 @@
 			"default": "#00ff00"
 		}
 	},
-	"textdomain": "startup-block",
+	"textdomain": "gutenberg-block-starter",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css"
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
 }
