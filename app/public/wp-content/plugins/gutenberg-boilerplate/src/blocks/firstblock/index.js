@@ -14,6 +14,11 @@ import Save from './save';
  */
 
 registerBlockType(metadata, {
+	icon: {
+		src: 'admin-generic',
+		foreground: 'blue',
+		background: 'lightgray',
+	},
 	edit: Edit,
 	save: Save,
 });

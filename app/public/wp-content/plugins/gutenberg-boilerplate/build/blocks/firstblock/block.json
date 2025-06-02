@@ -3,9 +3,8 @@
   "name": "sub/firstblock",
   "version": "0.1.0",
   "title": "First Block",
-  "category": "text",
-  "icon": "admin-generic",
-  "description": "Example block written with ESNext standard and JSX support build step required.",
+  "category": "common",
+  "description": "My first block in Gutenberg.",
   "supports": {
     "html": false,
     "anchor": true
