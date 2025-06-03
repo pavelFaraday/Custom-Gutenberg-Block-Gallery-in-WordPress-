@@ -5,7 +5,7 @@ export default function save({ attributes }) {
 	return (
 		<div {...useBlockProps.save({ className: "my-extra-class" })}>
 			<h1>{text}</h1>
-			<RichText.Content tagName="h3" value={attributes.content} />
+			<RichText.Content tagName="ul" value={attributes.content} />
 		</div>
 	);
 }
