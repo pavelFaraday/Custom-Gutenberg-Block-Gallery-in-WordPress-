@@ -23,7 +23,7 @@ return array(
 			),
 			'content' => array(
 				'type' => 'string',
-				'default' => 'Hello World!'
+				'default' => 'Hello World RichText!'
 			),
 			'color' => array(
 				'type' => 'string',

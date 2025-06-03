@@ -10,7 +10,7 @@ import { PanelBody, ColorPalette, TextControl } from "@wordpress/components";
 import "./editor.scss";
 
 export default function Edit({ attributes, setAttributes }) {
-	const { text } = attributes;
+	const { text, content } = attributes;
 
 	return (
 		<>
@@ -30,8 +30,19 @@ export default function Edit({ attributes, setAttributes }) {
 					initialOpen={false}
 				></PanelBody>
 			</InspectorControls>
-			<div {...useBlockProps()}>
+
+			<div {...useBlockProps({ className: "my-extra-class" })}>
 				<h2>{text}</h2>
+				<RichText
+					tagName="h3"
+					value={content}
+					onChange={(value) => setAttributes({ content: value })}
+					placeholder={__(
+						"Write your content here...",
+						"gutenberg-block-starter",
+					)}
+					allowedFormats={["core/bold", "core/italic", "core/link"]}
+				/>
 			</div>
 		</>
 	);

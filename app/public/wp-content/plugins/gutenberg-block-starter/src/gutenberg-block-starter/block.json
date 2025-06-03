@@ -18,7 +18,7 @@
 		},
 		"content": {
 			"type": "string",
-			"default": "Hello World!"
+			"default": "Hello World RichText!"
 		},
 		"color": {
 			"type": "string",
