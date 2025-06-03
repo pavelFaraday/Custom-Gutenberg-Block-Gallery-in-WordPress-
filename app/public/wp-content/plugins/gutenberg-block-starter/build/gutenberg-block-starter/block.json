@@ -12,6 +12,10 @@
     "html": false
   },
   "attributes": {
+    "text": {
+      "type": "string",
+      "default": "Hello World from Gutenberg Block Starter!"
+    },
     "content": {
       "type": "string",
       "default": "Hello World!"

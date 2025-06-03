@@ -1,9 +1,10 @@
 import { useBlockProps } from "@wordpress/block-editor";
 
-export default function save() {
+export default function save({ attributes }) {
+	const { text } = attributes;
 	return (
-		<p {...useBlockProps.save()}>
-			<div>SAVE FUNCTION</div>
-		</p>
+		<div {...useBlockProps.save()}>
+			<h1>{text}</h1>
+		</div>
 	);
 }

@@ -17,6 +17,10 @@ return array(
 			'html' => false
 		),
 		'attributes' => array(
+			'text' => array(
+				'type' => 'string',
+				'default' => 'Hello World from Gutenberg Block Starter!'
+			),
 			'content' => array(
 				'type' => 'string',
 				'default' => 'Hello World!'
