@@ -33,6 +33,15 @@ return array(
 			),
 			'BGColor' => array(
 				'type' => 'string'
+			),
+			'padding' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => 20,
+					'right' => 20,
+					'bottom' => 20,
+					'left' => 20
+				)
 			)
 		),
 		'textdomain' => 'gutenberg-block-starter',

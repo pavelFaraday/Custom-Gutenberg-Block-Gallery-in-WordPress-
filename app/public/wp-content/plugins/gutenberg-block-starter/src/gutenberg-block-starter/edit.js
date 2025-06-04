@@ -10,12 +10,20 @@ import {
 	PanelBody,
 	ColorPalette,
 	TextControl,
-	BGColor,
+	BoxControl,
 } from "@wordpress/components";
+
 import "./editor.scss";
 
 export default function Edit({ attributes, setAttributes }) {
-	const { text, content, contentColor, textColor, BGColor } = attributes;
+	const { text, content, contentColor, textColor, BGColor, padding } =
+		attributes;
+	const resolvedPadding = {
+		top: padding && typeof padding.top === "number" ? padding.top : 20,
+		right: padding && typeof padding.right === "number" ? padding.right : 20,
+		bottom: padding && typeof padding.bottom === "number" ? padding.bottom : 20,
+		left: padding && typeof padding.left === "number" ? padding.left : 20,
+	};
 
 	return (
 		<>
@@ -28,8 +36,23 @@ export default function Edit({ attributes, setAttributes }) {
 						label={__("Block Content Level", "gutenberg-block-starter")}
 						value={text}
 						onChange={(value) => setAttributes({ text: value })}
+						__next40pxDefaultSize={true}
+						__nextHasNoMarginBottom={true}
 					/>
 				</PanelBody>
+
+				<PanelBody>
+					<BoxControl
+						label={__("Padding", "gutenberg-block-starter")}
+						values={padding}
+						onChange={(value) => setAttributes({ padding: value })}
+						__next40pxDefaultSize={true}
+						__nextHasNoMarginBottom={true}
+						units="px"
+						allowReset={true}
+					/>
+				</PanelBody>
+
 				<PanelBody
 					title={__("Color Panel", "gutenberg-block-starter")}
 					initialOpen={false}
@@ -74,7 +97,10 @@ export default function Edit({ attributes, setAttributes }) {
 			<div
 				{...useBlockProps({
 					className: "my-extra-class",
-					style: { backgroundColor: BGColor },
+					style: {
+						backgroundColor: BGColor,
+						padding: `${resolvedPadding.top}px ${resolvedPadding.right}px ${resolvedPadding.bottom}px ${resolvedPadding.left}px`,
+					},
 				})}
 			>
 				<h2 style={{ color: textColor }}>{text}</h2>

@@ -28,6 +28,15 @@
     },
     "BGColor": {
       "type": "string"
+    },
+    "padding": {
+      "type": "object",
+      "default": {
+        "top": 20,
+        "right": 20,
+        "bottom": 20,
+        "left": 20
+      }
     }
   },
   "textdomain": "gutenberg-block-starter",
