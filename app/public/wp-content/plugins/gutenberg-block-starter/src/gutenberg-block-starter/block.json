@@ -20,9 +20,14 @@
 			"type": "string",
 			"default": "Hello World RichText!"
 		},
-		"color": {
-			"type": "string",
-			"default": "#00ff00"
+		"contentColor": {
+			"type": "string"
+		},
+		"textColor": {
+			"type": "string"
+		},
+		"BGColor": {
+			"type": "string"
 		}
 	},
 	"textdomain": "gutenberg-block-starter",

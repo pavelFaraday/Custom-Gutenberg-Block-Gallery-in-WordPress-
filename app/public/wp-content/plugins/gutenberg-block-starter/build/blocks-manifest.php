@@ -25,9 +25,14 @@ return array(
 				'type' => 'string',
 				'default' => 'Hello World RichText!'
 			),
-			'color' => array(
-				'type' => 'string',
-				'default' => '#00ff00'
+			'contentColor' => array(
+				'type' => 'string'
+			),
+			'textColor' => array(
+				'type' => 'string'
+			),
+			'BGColor' => array(
+				'type' => 'string'
 			)
 		),
 		'textdomain' => 'gutenberg-block-starter',
