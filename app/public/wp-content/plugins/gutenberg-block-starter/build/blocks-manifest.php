@@ -51,6 +51,15 @@ return array(
 			'radius' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'url' => array(
+				'type' => 'string'
+			),
+			'alt' => array(
+				'type' => 'string'
+			),
+			'id' => array(
+				'type' => 'number'
 			)
 		),
 		'textdomain' => 'gutenberg-block-starter',

@@ -10,6 +10,9 @@ export default function save({ attributes }) {
 		padding,
 		radius,
 		textAlign,
+		url,
+		alt,
+		id,
 	} = attributes;
 
 	const paddingStyle = padding
@@ -33,6 +36,15 @@ export default function save({ attributes }) {
 				value={content}
 				style={{ color: contentColor, textAlign }}
 			/>
+
+			{url && (
+				<img
+					src={url}
+					alt={alt}
+					id={id}
+					style={{ maxWidth: "100%", height: "auto" }}
+				/>
+			)}
 		</div>
 	);
 }

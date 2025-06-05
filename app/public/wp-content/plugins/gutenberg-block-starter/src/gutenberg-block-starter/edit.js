@@ -7,6 +7,7 @@ import {
 	PanelColorSettings,
 	AlignmentToolbar,
 	BlockControls,
+	MediaPlaceholder,
 } from "@wordpress/block-editor";
 import {
 	PanelBody,
@@ -14,6 +15,8 @@ import {
 	TextControl,
 	BoxControl,
 	RangeControl,
+	ToolbarGroup,
+	ToolbarButton,
 } from "@wordpress/components";
 
 import "./editor.scss";
@@ -28,6 +31,9 @@ export default function Edit({ attributes, setAttributes }) {
 		padding,
 		textAlign,
 		radius,
+		url,
+		alt,
+		id,
 	} = attributes;
 	const resolvedPadding = {
 		top: padding && typeof padding.top === "number" ? padding.top : 20,
@@ -43,6 +49,21 @@ export default function Edit({ attributes, setAttributes }) {
 					value={textAlign}
 					onChange={(value) => setAttributes({ textAlign: value })}
 				/>
+
+				{url && (
+					<ToolbarGroup>
+						<ToolbarButton
+							onClick={() => {
+								setAttributes({
+									url: "",
+									id: "",
+									alt: "",
+								});
+							}}
+							icon={"trash"}
+						></ToolbarButton>
+					</ToolbarGroup>
+				)}
 			</BlockControls>
 
 			<InspectorControls>
@@ -150,6 +171,31 @@ export default function Edit({ attributes, setAttributes }) {
 					allowedFormats={["core/bold", "core/italic", "core/link"]}
 					style={{ color: contentColor, textAlign }}
 				/>
+
+				{url ? (
+					<img src={url} alt={alt} style={{ width: "100%", height: "auto" }} />
+				) : (
+					<MediaPlaceholder
+						onSelect={(media) => {
+							setAttributes({
+								url: media.url,
+								id: media.id,
+								alt: media.alt || "Our Banner",
+							});
+						}}
+						allowedTypes={["image"]}
+						multiple={false}
+						icon="format-image"
+						labels={{
+							title: __("Add Your Banner", "gutenberg-block-starter"),
+							instructions: __(
+								"Drag and drop an image, or select one from your library.",
+								"gutenberg-block-starter",
+							),
+						}}
+						accept="image/*"
+					/>
+				)}
 			</div>
 		</>
 	);

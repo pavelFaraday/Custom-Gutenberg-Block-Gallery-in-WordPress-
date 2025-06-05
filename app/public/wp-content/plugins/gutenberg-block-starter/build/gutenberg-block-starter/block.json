@@ -46,6 +46,15 @@
     "radius": {
       "type": "number",
       "default": 0
+    },
+    "url": {
+      "type": "string"
+    },
+    "alt": {
+      "type": "string"
+    },
+    "id": {
+      "type": "number"
     }
   },
   "textdomain": "gutenberg-block-starter",

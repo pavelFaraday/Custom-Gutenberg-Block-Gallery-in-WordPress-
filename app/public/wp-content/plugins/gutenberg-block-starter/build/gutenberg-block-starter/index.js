@@ -8,7 +8,7 @@
   \************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-block-starter","version":"0.1.0","title":"Gutenberg Block Starter","category":"common","icon":"smiley","description":"My first block in Gutenberg.","example":{},"supports":{"html":false,"align":true},"attributes":{"text":{"type":"string","default":"Hello World from Gutenberg Block Starter!"},"content":{"type":"string","default":"Hello World RichText!"},"contentColor":{"type":"string"},"textColor":{"type":"string"},"BGColor":{"type":"string"},"padding":{"type":"object","default":{"top":20,"right":20,"bottom":20,"left":20}},"textAlign":{"type":"string","default":"left"},"radius":{"type":"number","default":0}},"textdomain":"gutenberg-block-starter","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-block-starter","version":"0.1.0","title":"Gutenberg Block Starter","category":"common","icon":"smiley","description":"My first block in Gutenberg.","example":{},"supports":{"html":false,"align":true},"attributes":{"text":{"type":"string","default":"Hello World from Gutenberg Block Starter!"},"content":{"type":"string","default":"Hello World RichText!"},"contentColor":{"type":"string"},"textColor":{"type":"string"},"BGColor":{"type":"string"},"padding":{"type":"object","default":{"top":20,"right":20,"bottom":20,"left":20}},"textAlign":{"type":"string","default":"left"},"radius":{"type":"number","default":0},"url":{"type":"string"},"alt":{"type":"string"},"id":{"type":"number"}},"textdomain":"gutenberg-block-starter","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ }),
 
@@ -48,7 +48,10 @@ function Edit({
     BGColor,
     padding,
     textAlign,
-    radius
+    radius,
+    url,
+    alt,
+    id
   } = attributes;
   const resolvedPadding = {
     top: padding && typeof padding.top === "number" ? padding.top : 20,
@@ -57,13 +60,24 @@ function Edit({
     left: padding && typeof padding.left === "number" ? padding.left : 20
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.AlignmentToolbar, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.AlignmentToolbar, {
         value: textAlign,
         onChange: value => setAttributes({
           textAlign: value
         })
-      })
+      }), url && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
+          onClick: () => {
+            setAttributes({
+              url: "",
+              id: "",
+              alt: ""
+            });
+          },
+          icon: "trash"
+        })
+      })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
         title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Settings", "gutenberg-block-starter"),
@@ -188,6 +202,29 @@ function Edit({
           color: contentColor,
           textAlign
         }
+      }), url ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+        src: url,
+        alt: alt,
+        style: {
+          width: "100%",
+          height: "auto"
+        }
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaPlaceholder, {
+        onSelect: media => {
+          setAttributes({
+            url: media.url,
+            id: media.id,
+            alt: media.alt || "Our Banner"
+          });
+        },
+        allowedTypes: ["image"],
+        multiple: false,
+        icon: "format-image",
+        labels: {
+          title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add Your Banner", "gutenberg-block-starter"),
+          instructions: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Drag and drop an image, or select one from your library.", "gutenberg-block-starter")
+        },
+        accept: "image/*"
       })]
     })]
   });
@@ -269,7 +306,10 @@ function save({
     BGColor,
     padding,
     radius,
-    textAlign
+    textAlign,
+    url,
+    alt,
+    id
   } = attributes;
   const paddingStyle = padding ? `${padding?.top || 0}px ${padding?.right || 0}px ${padding?.bottom || 0}px ${padding?.left || 0}px` : undefined;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
@@ -292,6 +332,14 @@ function save({
       style: {
         color: contentColor,
         textAlign
+      }
+    }), url && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+      src: url,
+      alt: alt,
+      id: id,
+      style: {
+        maxWidth: "100%",
+        height: "auto"
       }
     })]
   });
