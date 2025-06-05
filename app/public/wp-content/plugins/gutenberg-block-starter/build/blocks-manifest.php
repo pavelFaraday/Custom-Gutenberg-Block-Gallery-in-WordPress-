@@ -14,7 +14,8 @@ return array(
 			
 		),
 		'supports' => array(
-			'html' => false
+			'html' => false,
+			'align' => true
 		),
 		'attributes' => array(
 			'text' => array(
@@ -42,6 +43,10 @@ return array(
 					'bottom' => 20,
 					'left' => 20
 				)
+			),
+			'textAlign' => array(
+				'type' => 'string',
+				'default' => 'left'
 			)
 		),
 		'textdomain' => 'gutenberg-block-starter',

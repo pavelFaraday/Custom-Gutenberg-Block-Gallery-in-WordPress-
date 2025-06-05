@@ -8,7 +8,7 @@
   \************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-block-starter","version":"0.1.0","title":"Gutenberg Block Starter","category":"common","icon":"smiley","description":"My first block in Gutenberg.","example":{},"supports":{"html":false},"attributes":{"text":{"type":"string","default":"Hello World from Gutenberg Block Starter!"},"content":{"type":"string","default":"Hello World RichText!"},"contentColor":{"type":"string"},"textColor":{"type":"string"},"BGColor":{"type":"string"},"padding":{"type":"object","default":{"top":20,"right":20,"bottom":20,"left":20}}},"textdomain":"gutenberg-block-starter","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-block-starter","version":"0.1.0","title":"Gutenberg Block Starter","category":"common","icon":"smiley","description":"My first block in Gutenberg.","example":{},"supports":{"html":false,"align":true},"attributes":{"text":{"type":"string","default":"Hello World from Gutenberg Block Starter!"},"content":{"type":"string","default":"Hello World RichText!"},"contentColor":{"type":"string"},"textColor":{"type":"string"},"BGColor":{"type":"string"},"padding":{"type":"object","default":{"top":20,"right":20,"bottom":20,"left":20}},"textAlign":{"type":"string","default":"left"}},"textdomain":"gutenberg-block-starter","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ }),
 
@@ -46,7 +46,8 @@ function Edit({
     contentColor,
     textColor,
     BGColor,
-    padding
+    padding,
+    textAlign
   } = attributes;
   const resolvedPadding = {
     top: padding && typeof padding.top === "number" ? padding.top : 20,
@@ -55,7 +56,14 @@ function Edit({
     left: padding && typeof padding.left === "number" ? padding.left : 20
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.AlignmentToolbar, {
+        value: textAlign,
+        onChange: value => setAttributes({
+          textAlign: value
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
         title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Settings", "gutenberg-block-starter"),
         initialOpen: true,
@@ -160,7 +168,8 @@ function Edit({
         placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Write your content here...", "gutenberg-block-starter"),
         allowedFormats: ["core/bold", "core/italic", "core/link"],
         style: {
-          color: contentColor
+          color: contentColor,
+          textAlign
         }
       })]
     })]

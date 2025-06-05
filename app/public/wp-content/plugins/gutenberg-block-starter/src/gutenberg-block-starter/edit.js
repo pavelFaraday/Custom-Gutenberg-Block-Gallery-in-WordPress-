@@ -5,6 +5,8 @@ import {
 	InspectorControls,
 	RichText,
 	PanelColorSettings,
+	AlignmentToolbar,
+	BlockControls,
 } from "@wordpress/block-editor";
 import {
 	PanelBody,
@@ -16,8 +18,15 @@ import {
 import "./editor.scss";
 
 export default function Edit({ attributes, setAttributes }) {
-	const { text, content, contentColor, textColor, BGColor, padding } =
-		attributes;
+	const {
+		text,
+		content,
+		contentColor,
+		textColor,
+		BGColor,
+		padding,
+		textAlign,
+	} = attributes;
 	const resolvedPadding = {
 		top: padding && typeof padding.top === "number" ? padding.top : 20,
 		right: padding && typeof padding.right === "number" ? padding.right : 20,
@@ -27,6 +36,12 @@ export default function Edit({ attributes, setAttributes }) {
 
 	return (
 		<>
+			<BlockControls>
+				<AlignmentToolbar
+					value={textAlign}
+					onChange={(value) => setAttributes({ textAlign: value })}
+				/>
+			</BlockControls>
 			<InspectorControls>
 				<PanelBody
 					title={__("Settings", "gutenberg-block-starter")}
@@ -113,7 +128,7 @@ export default function Edit({ attributes, setAttributes }) {
 						"gutenberg-block-starter",
 					)}
 					allowedFormats={["core/bold", "core/italic", "core/link"]}
-					style={{ color: contentColor }}
+					style={{ color: contentColor, textAlign }}
 				/>
 			</div>
 		</>

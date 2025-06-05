@@ -9,7 +9,8 @@
   "description": "My first block in Gutenberg.",
   "example": {},
   "supports": {
-    "html": false
+    "html": false,
+    "align": true
   },
   "attributes": {
     "text": {
@@ -37,6 +38,10 @@
         "bottom": 20,
         "left": 20
       }
+    },
+    "textAlign": {
+      "type": "string",
+      "default": "left"
     }
   },
   "textdomain": "gutenberg-block-starter",
