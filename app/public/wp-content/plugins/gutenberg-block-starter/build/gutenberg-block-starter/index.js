@@ -8,7 +8,7 @@
   \************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-block-starter","version":"0.1.0","title":"Gutenberg Block Starter","category":"common","icon":"smiley","description":"My first block in Gutenberg.","example":{},"supports":{"html":false,"align":true},"attributes":{"text":{"type":"string","default":"Hello World from Gutenberg Block Starter!"},"content":{"type":"string","default":"Hello World RichText!"},"contentColor":{"type":"string"},"textColor":{"type":"string"},"BGColor":{"type":"string"},"padding":{"type":"object","default":{"top":20,"right":20,"bottom":20,"left":20}},"textAlign":{"type":"string","default":"left"}},"textdomain":"gutenberg-block-starter","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-block-starter","version":"0.1.0","title":"Gutenberg Block Starter","category":"common","icon":"smiley","description":"My first block in Gutenberg.","example":{},"supports":{"html":false,"align":true},"attributes":{"text":{"type":"string","default":"Hello World from Gutenberg Block Starter!"},"content":{"type":"string","default":"Hello World RichText!"},"contentColor":{"type":"string"},"textColor":{"type":"string"},"BGColor":{"type":"string"},"padding":{"type":"object","default":{"top":20,"right":20,"bottom":20,"left":20}},"textAlign":{"type":"string","default":"left"},"radius":{"type":"number","default":0}},"textdomain":"gutenberg-block-starter","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ }),
 
@@ -47,7 +47,8 @@ function Edit({
     textColor,
     BGColor,
     padding,
-    textAlign
+    textAlign,
+    radius
   } = attributes;
   const resolvedPadding = {
     top: padding && typeof padding.top === "number" ? padding.top : 20,
@@ -130,6 +131,21 @@ function Edit({
             contentColor: color
           })
         })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Radius", "gutenberg-block-starter"),
+        initialOpen: false,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Radius", "gutenberg-block-starter"),
+          value: radius,
+          onChange: value => setAttributes({
+            radius: value
+          }),
+          min: 0,
+          max: 50,
+          __next40pxDefaultSize: true,
+          __nextHasNoMarginBottom: true,
+          allowReset: true
+        })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.PanelColorSettings, {
         title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Content Color", "gutenberg-block-starter"),
         colorSettings: [{
@@ -151,7 +167,8 @@ function Edit({
         className: "my-extra-class",
         style: {
           backgroundColor: BGColor,
-          padding: `${resolvedPadding.top}px ${resolvedPadding.right}px ${resolvedPadding.bottom}px ${resolvedPadding.left}px`
+          padding: `${resolvedPadding.top}px ${resolvedPadding.right}px ${resolvedPadding.bottom}px ${resolvedPadding.left}px`,
+          borderRadius: `${radius}px`
         }
       }),
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
@@ -250,7 +267,9 @@ function save({
     contentColor,
     textColor,
     BGColor,
-    padding
+    padding,
+    radius,
+    textAlign
   } = attributes;
   const paddingStyle = padding ? `${padding?.top || 0}px ${padding?.right || 0}px ${padding?.bottom || 0}px ${padding?.left || 0}px` : undefined;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
@@ -258,7 +277,8 @@ function save({
       className: "my-extra-class",
       style: {
         backgroundColor: BGColor,
-        padding: paddingStyle
+        padding: paddingStyle,
+        borderRadius: `${radius}px`
       }
     }),
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
@@ -270,7 +290,8 @@ function save({
       tagName: "ul",
       value: content,
       style: {
-        color: contentColor
+        color: contentColor,
+        textAlign
       }
     })]
   });

@@ -42,6 +42,10 @@
     "textAlign": {
       "type": "string",
       "default": "left"
+    },
+    "radius": {
+      "type": "number",
+      "default": 0
     }
   },
   "textdomain": "gutenberg-block-starter",

@@ -13,6 +13,7 @@ import {
 	ColorPalette,
 	TextControl,
 	BoxControl,
+	RangeControl,
 } from "@wordpress/components";
 
 import "./editor.scss";
@@ -26,6 +27,7 @@ export default function Edit({ attributes, setAttributes }) {
 		BGColor,
 		padding,
 		textAlign,
+		radius,
 	} = attributes;
 	const resolvedPadding = {
 		top: padding && typeof padding.top === "number" ? padding.top : 20,
@@ -42,6 +44,7 @@ export default function Edit({ attributes, setAttributes }) {
 					onChange={(value) => setAttributes({ textAlign: value })}
 				/>
 			</BlockControls>
+
 			<InspectorControls>
 				<PanelBody
 					title={__("Settings", "gutenberg-block-starter")}
@@ -92,6 +95,22 @@ export default function Edit({ attributes, setAttributes }) {
 					/>
 				</PanelBody>
 
+				<PanelBody
+					title={__("Border Radius", "gutenberg-block-starter")}
+					initialOpen={false}
+				>
+					<RangeControl
+						label={__("Border Radius", "gutenberg-block-starter")}
+						value={radius}
+						onChange={(value) => setAttributes({ radius: value })}
+						min={0}
+						max={50}
+						__next40pxDefaultSize={true}
+						__nextHasNoMarginBottom={true}
+						allowReset={true}
+					/>
+				</PanelBody>
+
 				<PanelColorSettings
 					title={__("Content Color", "gutenberg-block-starter")}
 					colorSettings={[
@@ -115,6 +134,7 @@ export default function Edit({ attributes, setAttributes }) {
 					style: {
 						backgroundColor: BGColor,
 						padding: `${resolvedPadding.top}px ${resolvedPadding.right}px ${resolvedPadding.bottom}px ${resolvedPadding.left}px`,
+						borderRadius: `${radius}px`,
 					},
 				})}
 			>

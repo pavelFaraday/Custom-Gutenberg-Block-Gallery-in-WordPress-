@@ -47,6 +47,10 @@ return array(
 			'textAlign' => array(
 				'type' => 'string',
 				'default' => 'left'
+			),
+			'radius' => array(
+				'type' => 'number',
+				'default' => 0
 			)
 		),
 		'textdomain' => 'gutenberg-block-starter',
