@@ -7,7 +7,9 @@ import {
 	PanelColorSettings,
 	AlignmentToolbar,
 	BlockControls,
+	MediaUpload,
 	MediaPlaceholder,
+	MediaUploadCheck,
 } from "@wordpress/block-editor";
 import {
 	PanelBody,
@@ -61,7 +63,24 @@ export default function Edit({ attributes, setAttributes }) {
 								});
 							}}
 							icon={"trash"}
-						></ToolbarButton>
+						/>
+						<MediaUploadCheck>
+							<MediaUpload
+								onSelect={(media) => {
+									setAttributes({
+										url: media.url,
+										id: media.id,
+										alt: media.alt || "Our Banner",
+									});
+								}}
+								allowedTypes={["image"]}
+								multiple={false}
+								value={id}
+								render={({ open }) => (
+									<ToolbarButton icon={"edit"} onClick={open} />
+								)}
+							/>
+						</MediaUploadCheck>
 					</ToolbarGroup>
 				)}
 			</BlockControls>
