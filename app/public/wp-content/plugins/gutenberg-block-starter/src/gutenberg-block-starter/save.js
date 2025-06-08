@@ -1,4 +1,4 @@
-import { useBlockProps, RichText } from "@wordpress/block-editor";
+import { useBlockProps, RichText, InnerBlocks } from "@wordpress/block-editor";
 
 export default function save({ attributes }) {
 	const {
@@ -45,6 +45,8 @@ export default function save({ attributes }) {
 					style={{ maxWidth: "100%", height: "auto" }}
 				/>
 			)}
+
+			<InnerBlocks.Content />
 		</div>
 	);
 }

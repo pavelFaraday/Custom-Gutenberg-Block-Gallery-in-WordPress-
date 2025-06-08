@@ -244,6 +244,11 @@ function Edit({
           instructions: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Drag and drop an image, or select one from your library.", "gutenberg-block-starter")
         },
         accept: "image/*"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks, {
+        template: [["core/heading", {
+          placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("My InnerBlock Heading", "gutenberg-block-starter")
+        }], ["core/image"]],
+        templateLock: true
       })]
     })]
   });
@@ -360,7 +365,7 @@ function save({
         maxWidth: "100%",
         height: "auto"
       }
-    })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InnerBlocks.Content, {})]
   });
 }
 

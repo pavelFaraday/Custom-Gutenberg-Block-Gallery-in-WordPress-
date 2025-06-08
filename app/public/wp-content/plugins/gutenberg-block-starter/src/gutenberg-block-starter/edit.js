@@ -10,6 +10,7 @@ import {
 	MediaUpload,
 	MediaPlaceholder,
 	MediaUploadCheck,
+	InnerBlocks,
 } from "@wordpress/block-editor";
 import {
 	PanelBody,
@@ -215,6 +216,22 @@ export default function Edit({ attributes, setAttributes }) {
 						accept="image/*"
 					/>
 				)}
+
+				<InnerBlocks
+					template={[
+						[
+							"core/heading",
+							{
+								placeholder: __(
+									"My InnerBlock Heading",
+									"gutenberg-block-starter",
+								),
+							},
+						],
+						["core/image"],
+					]}
+					templateLock={true}
+				/>
 			</div>
 		</>
 	);
