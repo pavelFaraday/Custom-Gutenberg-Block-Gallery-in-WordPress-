@@ -13,6 +13,7 @@ export default function save({ attributes }) {
 		url,
 		alt,
 		id,
+		titles,
 	} = attributes;
 
 	const paddingStyle = padding
@@ -47,6 +48,11 @@ export default function save({ attributes }) {
 			)}
 
 			<InnerBlocks.Content />
+
+			{titles &&
+				titles.map((item, index) => {
+					return <li key={index}>{item.title}</li>;
+				})}
 		</div>
 	);
 }

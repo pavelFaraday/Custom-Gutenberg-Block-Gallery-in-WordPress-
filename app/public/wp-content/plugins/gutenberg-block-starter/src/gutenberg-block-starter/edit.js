@@ -37,6 +37,7 @@ export default function Edit({ attributes, setAttributes }) {
 		url,
 		alt,
 		id,
+		titles,
 	} = attributes;
 	const resolvedPadding = {
 		top: padding && typeof padding.top === "number" ? padding.top : 20,
@@ -152,6 +153,37 @@ export default function Edit({ attributes, setAttributes }) {
 					/>
 				</PanelBody>
 
+				<PanelBody title={__("Content", "gutenberg-block-starter")}>
+					<button
+						onClick={() => {
+							setAttributes({
+								titles: [
+									...titles,
+									{ id: titles.length + 1, title: "default Title" },
+								],
+							});
+						}}
+					>
+						Add New
+					</button>
+					{titles &&
+						titles.map((item, index) => {
+							return (
+								<div key={index}>
+									<TextControl
+										label={"Add Title"}
+										value={item.title}
+										onChange={(value) => {
+											const newTitles = [...titles];
+											newTitles[index].title = value;
+											setAttributes({ titles: newTitles });
+										}}
+									/>
+								</div>
+							);
+						})}
+				</PanelBody>
+
 				<PanelColorSettings
 					title={__("Content Color", "gutenberg-block-starter")}
 					colorSettings={[
@@ -191,7 +223,6 @@ export default function Edit({ attributes, setAttributes }) {
 					allowedFormats={["core/bold", "core/italic", "core/link"]}
 					style={{ color: contentColor, textAlign }}
 				/>
-
 				{url ? (
 					<img src={url} alt={alt} style={{ width: "100%", height: "auto" }} />
 				) : (
@@ -216,7 +247,6 @@ export default function Edit({ attributes, setAttributes }) {
 						accept="image/*"
 					/>
 				)}
-
 				<InnerBlocks
 					template={[
 						[
@@ -234,6 +264,11 @@ export default function Edit({ attributes, setAttributes }) {
 					templateLock={true}
 					renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
 				/>
+
+				{titles &&
+					titles.map((item, index) => {
+						return <li key={index}>{item.title}</li>;
+					})}
 			</div>
 		</>
 	);

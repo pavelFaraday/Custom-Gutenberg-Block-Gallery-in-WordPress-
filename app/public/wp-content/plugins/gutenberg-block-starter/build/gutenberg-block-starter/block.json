@@ -55,6 +55,10 @@
     },
     "id": {
       "type": "number"
+    },
+    "titles": {
+      "type": "array",
+      "default": []
     }
   },
   "textdomain": "gutenberg-block-starter",

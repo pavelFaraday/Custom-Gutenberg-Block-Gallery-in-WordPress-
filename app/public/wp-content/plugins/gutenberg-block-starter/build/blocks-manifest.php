@@ -60,6 +60,12 @@ return array(
 			),
 			'id' => array(
 				'type' => 'number'
+			),
+			'titles' => array(
+				'type' => 'array',
+				'default' => array(
+					
+				)
 			)
 		),
 		'textdomain' => 'gutenberg-block-starter',
