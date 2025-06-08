@@ -230,7 +230,9 @@ export default function Edit({ attributes, setAttributes }) {
 						],
 						["core/image"],
 					]}
+					allowedBlocks={["core/heading", "core/image"]}
 					templateLock={true}
+					renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
 				/>
 			</div>
 		</>

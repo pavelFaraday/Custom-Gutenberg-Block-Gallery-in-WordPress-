@@ -248,7 +248,9 @@ function Edit({
         template: [["core/heading", {
           placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("My InnerBlock Heading", "gutenberg-block-starter")
         }], ["core/image"]],
-        templateLock: true
+        allowedBlocks: ["core/heading", "core/image"],
+        templateLock: true,
+        renderAppender: () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks.ButtonBlockAppender, {})
       })]
     })]
   });
