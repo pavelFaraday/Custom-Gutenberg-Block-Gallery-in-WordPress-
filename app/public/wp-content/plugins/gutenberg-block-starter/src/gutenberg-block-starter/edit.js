@@ -23,6 +23,7 @@ import {
 } from "@wordpress/components";
 
 import "./editor.scss";
+import Info from "../components/info/info.js";
 
 export default function Edit({ attributes, setAttributes }) {
 	const {
@@ -154,6 +155,7 @@ export default function Edit({ attributes, setAttributes }) {
 				</PanelBody>
 
 				<PanelBody title={__("Content", "gutenberg-block-starter")}>
+					<Info title="Our Repeatable Title" icon="wordpress" />
 					<button
 						onClick={() => {
 							setAttributes({
@@ -182,6 +184,13 @@ export default function Edit({ attributes, setAttributes }) {
 								</div>
 							);
 						})}
+				</PanelBody>
+
+				<PanelBody
+					title={__("Custom Component Settings", "gutenberg-block-starter")}
+					initialOpen={false}
+				>
+					<Info title="This is a Component" icon="admin-generic" />
 				</PanelBody>
 
 				<PanelColorSettings
