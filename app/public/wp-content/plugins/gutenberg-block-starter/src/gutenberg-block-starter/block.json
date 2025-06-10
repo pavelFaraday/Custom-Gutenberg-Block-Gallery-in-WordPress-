@@ -13,6 +13,9 @@
 		"align": true
 	},
 	"attributes": {
+		"ClassID": {
+			"type": "string"
+		},
 		"text": {
 			"type": "string",
 			"default": "Hello World from Gutenberg Block Starter!"
@@ -59,6 +62,10 @@
 		"titles": {
 			"type": "array",
 			"default": []
+		},
+		"color": {
+			"type": "string",
+			"default": "#f00"
 		}
 	},
 	"textdomain": "gutenberg-block-starter",

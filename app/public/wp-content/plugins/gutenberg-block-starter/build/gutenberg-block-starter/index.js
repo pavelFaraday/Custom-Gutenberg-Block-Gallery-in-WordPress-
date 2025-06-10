@@ -55,7 +55,7 @@ __webpack_require__.r(__webpack_exports__);
   \************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-block-starter","version":"0.1.0","title":"Gutenberg Block Starter","category":"common","icon":"smiley","description":"My first block in Gutenberg.","example":{},"supports":{"html":false,"align":true},"attributes":{"text":{"type":"string","default":"Hello World from Gutenberg Block Starter!"},"content":{"type":"string","default":"Hello World RichText!"},"contentColor":{"type":"string"},"textColor":{"type":"string"},"BGColor":{"type":"string"},"padding":{"type":"object","default":{"top":20,"right":20,"bottom":20,"left":20}},"textAlign":{"type":"string","default":"left"},"radius":{"type":"number","default":0},"url":{"type":"string"},"alt":{"type":"string"},"id":{"type":"number"},"titles":{"type":"array","default":[]}},"textdomain":"gutenberg-block-starter","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-block-starter","version":"0.1.0","title":"Gutenberg Block Starter","category":"common","icon":"smiley","description":"My first block in Gutenberg.","example":{},"supports":{"html":false,"align":true},"attributes":{"ClassID":{"type":"string"},"text":{"type":"string","default":"Hello World from Gutenberg Block Starter!"},"content":{"type":"string","default":"Hello World RichText!"},"contentColor":{"type":"string"},"textColor":{"type":"string"},"BGColor":{"type":"string"},"padding":{"type":"object","default":{"top":20,"right":20,"bottom":20,"left":20}},"textAlign":{"type":"string","default":"left"},"radius":{"type":"number","default":0},"url":{"type":"string"},"alt":{"type":"string"},"id":{"type":"number"},"titles":{"type":"array","default":[]},"color":{"type":"string","default":"#f00"}},"textdomain":"gutenberg-block-starter","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ }),
 
@@ -87,7 +87,8 @@ __webpack_require__.r(__webpack_exports__);
 
 function Edit({
   attributes,
-  setAttributes
+  setAttributes,
+  clientId
 }) {
   const {
     text,
@@ -101,8 +102,13 @@ function Edit({
     url,
     alt,
     id,
-    titles
+    titles,
+    color,
+    ClassID
   } = attributes;
+  setAttributes({
+    ClassID: "starter-block-" + clientId.slice(0, 8)
+  });
   const resolvedPadding = {
     top: padding && typeof padding.top === "number" ? padding.top : 20,
     right: padding && typeof padding.right === "number" ? padding.right : 20,
@@ -110,7 +116,9 @@ function Edit({
     left: padding && typeof padding.left === "number" ? padding.left : 20
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("style", {
+      children: `.title.${ClassID} {color: ${color}; }`
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.AlignmentToolbar, {
         value: textAlign,
         onChange: value => setAttributes({
@@ -159,6 +167,16 @@ function Edit({
           }),
           __next40pxDefaultSize: true,
           __nextHasNoMarginBottom: true
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Color Settings", "gutenberg-block-starter"),
+        initialOpen: false,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
+          color: color,
+          onChangeComplete: value => setAttributes({
+            color: value.hex
+          }),
+          disableAlpha: true
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BoxControl, {
@@ -308,6 +326,9 @@ function Edit({
           color: contentColor,
           textAlign
         }
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
+        className: `title ${ClassID}`,
+        children: "Blocks 222 with ClassId"
       }), url ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
         src: url,
         alt: alt,

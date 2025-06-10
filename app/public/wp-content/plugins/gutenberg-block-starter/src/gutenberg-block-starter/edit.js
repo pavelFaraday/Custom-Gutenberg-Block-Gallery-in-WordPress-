@@ -20,12 +20,13 @@ import {
 	RangeControl,
 	ToolbarGroup,
 	ToolbarButton,
+	ColorPicker,
 } from "@wordpress/components";
 
 import "./editor.scss";
 import Info from "../components/info/info.js";
 
-export default function Edit({ attributes, setAttributes }) {
+export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		text,
 		content,
@@ -39,7 +40,12 @@ export default function Edit({ attributes, setAttributes }) {
 		alt,
 		id,
 		titles,
+		color,
+		ClassID,
 	} = attributes;
+
+	setAttributes({ ClassID: "starter-block-" + clientId.slice(0, 8) });
+
 	const resolvedPadding = {
 		top: padding && typeof padding.top === "number" ? padding.top : 20,
 		right: padding && typeof padding.right === "number" ? padding.right : 20,
@@ -49,6 +55,7 @@ export default function Edit({ attributes, setAttributes }) {
 
 	return (
 		<>
+			<style>{`.title.${ClassID} {color: ${color}; }`}</style>
 			<BlockControls>
 				<AlignmentToolbar
 					value={textAlign}
@@ -99,6 +106,17 @@ export default function Edit({ attributes, setAttributes }) {
 						onChange={(value) => setAttributes({ text: value })}
 						__next40pxDefaultSize={true}
 						__nextHasNoMarginBottom={true}
+					/>
+				</PanelBody>
+
+				<PanelBody
+					title={__("Color Settings", "gutenberg-block-starter")}
+					initialOpen={false}
+				>
+					<ColorPicker
+						color={color}
+						onChangeComplete={(value) => setAttributes({ color: value.hex })}
+						disableAlpha
 					/>
 				</PanelBody>
 
@@ -232,6 +250,9 @@ export default function Edit({ attributes, setAttributes }) {
 					allowedFormats={["core/bold", "core/italic", "core/link"]}
 					style={{ color: contentColor, textAlign }}
 				/>
+
+				<h1 className={`title ${ClassID}`}>Blocks 222 with ClassId</h1>
+
 				{url ? (
 					<img src={url} alt={alt} style={{ width: "100%", height: "auto" }} />
 				) : (

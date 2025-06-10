@@ -18,6 +18,9 @@ return array(
 			'align' => true
 		),
 		'attributes' => array(
+			'ClassID' => array(
+				'type' => 'string'
+			),
 			'text' => array(
 				'type' => 'string',
 				'default' => 'Hello World from Gutenberg Block Starter!'
@@ -66,6 +69,10 @@ return array(
 				'default' => array(
 					
 				)
+			),
+			'color' => array(
+				'type' => 'string',
+				'default' => '#f00'
 			)
 		),
 		'textdomain' => 'gutenberg-block-starter',
