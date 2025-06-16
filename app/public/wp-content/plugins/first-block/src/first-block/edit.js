@@ -1,6 +1,17 @@
 import { __ } from "@wordpress/i18n";
-import { BlockControls, useBlockProps } from "@wordpress/block-editor";
-import { ToolbarGroup, ToolbarButton } from "@wordpress/components";
+import {
+	BlockControls,
+	useBlockProps,
+	InspectorControls,
+} from "@wordpress/block-editor";
+import {
+	ToolbarGroup,
+	ToolbarButton,
+	PanelBody,
+	TextControl,
+	ColorPalette,
+	ToggleControl,
+} from "@wordpress/components";
 import "./editor.scss";
 
 export default function Edit() {
@@ -40,6 +51,44 @@ export default function Edit() {
 					/>
 				</ToolbarGroup>
 			</BlockControls>
+
+			<InspectorControls>
+				<PanelBody
+					title={__("Block Settings", "first-block")}
+					initialOpen={false}
+					icon={"admin-generic"}
+				>
+					<TextControl
+						label={__("Enter Text", "first-block")}
+						onChange={(v) => {
+							console.log("Text changed:", v);
+						}}
+					/>
+				</PanelBody>
+			</InspectorControls>
+
+			<InspectorControls group="styles">
+				<PanelBody
+					title={__("Color", "first-block")}
+					initialOpen={false}
+					icon={"admin-appearance"}
+				>
+					<ColorPalette
+						onChange={(color) => {
+							console.log("Color changed:", color);
+						}}
+					/>
+				</PanelBody>
+			</InspectorControls>
+
+			<InspectorControls group="advanced">
+				<ToggleControl
+					label={__("Enable Feature", "first-block")}
+					onChange={(e) => {
+						console.log("Something Visible");
+					}}
+				/>
+			</InspectorControls>
 
 			<div
 				{...useBlockProps({
