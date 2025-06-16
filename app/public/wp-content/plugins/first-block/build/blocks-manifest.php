@@ -7,9 +7,9 @@ return array(
 		'name' => 'create-block/first-block',
 		'version' => '0.1.0',
 		'title' => 'First Block',
-		'category' => 'widgets',
-		'icon' => 'smiley',
-		'description' => 'Example block scaffolded with Create Block tool.',
+		'category' => 'media',
+		'icon' => 'admin-plugins',
+		'description' => 'Code is poetry',
 		'example' => array(
 			
 		),
