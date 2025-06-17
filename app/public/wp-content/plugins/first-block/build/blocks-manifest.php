@@ -13,8 +13,35 @@ return array(
 		'example' => array(
 			
 		),
+		'attributes' => array(
+			'content' => array(
+				'type' => 'string',
+				'default' => 'Hello World'
+			)
+		),
 		'supports' => array(
-			'html' => false
+			'html' => false,
+			'anchor' => true,
+			'align' => true,
+			'color' => array(
+				'background' => true,
+				'text' => true,
+				'link' => true,
+				'gradients' => true
+			),
+			'spacing' => array(
+				'margin' => true,
+				'padding' => true,
+				'blockGap' => true
+			),
+			'typography' => array(
+				'fontSize' => true,
+				'lineHeight' => true,
+				'fontFamily' => true,
+				'textTransform' => true,
+				'textDecoration' => true,
+				'fontWeight' => true
+			)
 		),
 		'textdomain' => 'first-block',
 		'editorScript' => 'file:./index.js',

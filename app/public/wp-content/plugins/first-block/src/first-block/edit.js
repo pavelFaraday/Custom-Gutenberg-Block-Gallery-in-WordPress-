@@ -3,6 +3,7 @@ import {
 	BlockControls,
 	useBlockProps,
 	InspectorControls,
+	RichText,
 } from "@wordpress/block-editor";
 import {
 	ToolbarGroup,
@@ -14,7 +15,8 @@ import {
 } from "@wordpress/components";
 import "./editor.scss";
 
-export default function Edit() {
+export default function Edit({ attributes, setAttributes }) {
+	const { content } = attributes;
 	return (
 		<>
 			<BlockControls>
@@ -101,7 +103,17 @@ export default function Edit() {
 					},
 				})}
 			>
-				<p>{__("Hello World!")}</p>
+				<div>
+					<RichText
+						tagName="h2"
+						value={content}
+						onChange={(v) => {
+							setAttributes({ content: v });
+						}}
+						placeholder={__("Enter your text here", "first-block")}
+						allowedFormats={["core/bold", "core/italic"]}
+					/>
+				</div>
 			</div>
 		</>
 	);
