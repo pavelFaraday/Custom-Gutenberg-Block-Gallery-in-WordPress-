@@ -12,11 +12,13 @@ import {
 	TextControl,
 	ColorPalette,
 	ToggleControl,
+	Placeholder,
+	Button,
 } from "@wordpress/components";
 import "./editor.scss";
 
 export default function Edit({ attributes, setAttributes }) {
-	const { content } = attributes;
+	const { content, videoID, editingMode } = attributes;
 	return (
 		<>
 			<BlockControls>
@@ -24,9 +26,7 @@ export default function Edit({ attributes, setAttributes }) {
 					<ToolbarButton
 						icon="edit"
 						label={__("Edit", "first-block")}
-						onClick={() => {
-							alert("Edit button clicked!");
-						}}
+						onClick={(v) => setAttributes({ editingMode: !editingMode })}
 					/>
 					<ToolbarButton
 						icon="trash"
@@ -61,10 +61,15 @@ export default function Edit({ attributes, setAttributes }) {
 					icon={"admin-generic"}
 				>
 					<TextControl
-						label={__("Enter Text", "first-block")}
+						label={__("Enter Video ID", "first-block")}
+						value={videoID}
 						onChange={(v) => {
-							console.log("Text changed:", v);
+							setAttributes({ videoID: v });
 						}}
+						help={__(
+							"Enter the YouTube video ID to embed the video.",
+							"first-block",
+						)}
 					/>
 				</PanelBody>
 			</InspectorControls>
@@ -94,7 +99,7 @@ export default function Edit({ attributes, setAttributes }) {
 
 			<div
 				{...useBlockProps({
-					className: "dummy-custom-block",
+					className: "youtube-video-block",
 					style: {
 						backgroundColor: "#f6f689",
 						padding: "20px",
@@ -113,6 +118,45 @@ export default function Edit({ attributes, setAttributes }) {
 						placeholder={__("Enter your text here", "first-block")}
 						allowedFormats={["core/bold", "core/italic"]}
 					/>
+				</div>
+
+				<div>
+					{editingMode ? (
+						<Placeholder
+							icon="video-alt3"
+							label={__("Enter Video ID", "first-block")}
+						>
+							<TextControl
+								value={videoID}
+								onChange={(v) => {
+									setAttributes({ videoID: v });
+								}}
+								help={__(
+									"Enter the YouTube video ID to embed the video.",
+									"first-block",
+								)}
+							/>
+							<Button
+								onClick={() => {
+									setAttributes({ editingMode: false });
+								}}
+								variant="primary"
+							>
+								Embed Video
+							</Button>
+						</Placeholder>
+					) : (
+						<iframe
+							width="560"
+							height="315"
+							src={`https://www.youtube.com/embed/${videoID}`}
+							title="YouTube video player"
+							frameborder="0"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+							referrerpolicy="strict-origin-when-cross-origin"
+							allowfullscreen
+						></iframe>
+					)}
 				</div>
 			</div>
 		</>

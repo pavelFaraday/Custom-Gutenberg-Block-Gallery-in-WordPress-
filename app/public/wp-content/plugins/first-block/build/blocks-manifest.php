@@ -4,19 +4,22 @@ return array(
 	'first-block' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
-		'name' => 'create-block/first-block',
+		'name' => 'create-block/youtube-video',
 		'version' => '0.1.0',
-		'title' => 'First Block',
+		'title' => 'Youtube Video',
 		'category' => 'media',
 		'icon' => 'admin-plugins',
-		'description' => 'Code is poetry',
+		'description' => 'Youtube embed Video',
 		'example' => array(
 			
 		),
 		'attributes' => array(
-			'content' => array(
-				'type' => 'string',
-				'default' => 'Hello World'
+			'videoID' => array(
+				'type' => 'string'
+			),
+			'editingMode' => array(
+				'type' => 'boolean',
+				'default' => true
 			)
 		),
 		'supports' => array(

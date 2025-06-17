@@ -5,6 +5,10 @@ import save from "./save";
 import metadata from "./block.json";
 
 registerBlockType(metadata.name, {
+	icon: {
+		src: "video-alt3",
+		foreground: "#f00",
+	},
 	/**
 	 * @see ./edit.js
 	 */

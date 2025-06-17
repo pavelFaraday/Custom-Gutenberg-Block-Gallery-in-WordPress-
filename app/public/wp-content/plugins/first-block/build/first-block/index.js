@@ -8,7 +8,7 @@
   \************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/first-block","version":"0.1.0","title":"First Block","category":"media","icon":"admin-plugins","description":"Code is poetry","example":{},"attributes":{"content":{"type":"string","default":"Hello World"}},"supports":{"html":false,"anchor":true,"align":true,"color":{"background":true,"text":true,"link":true,"gradients":true},"spacing":{"margin":true,"padding":true,"blockGap":true},"typography":{"fontSize":true,"lineHeight":true,"fontFamily":true,"textTransform":true,"textDecoration":true,"fontWeight":true}},"textdomain":"first-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/youtube-video","version":"0.1.0","title":"Youtube Video","category":"media","icon":"admin-plugins","description":"Youtube embed Video","example":{},"attributes":{"videoID":{"type":"string"},"editingMode":{"type":"boolean","default":true}},"supports":{"html":false,"anchor":true,"align":true,"color":{"background":true,"text":true,"link":true,"gradients":true},"spacing":{"margin":true,"padding":true,"blockGap":true},"typography":{"fontSize":true,"lineHeight":true,"fontFamily":true,"textTransform":true,"textDecoration":true,"fontWeight":true}},"textdomain":"first-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ }),
 
@@ -41,7 +41,9 @@ function Edit({
   setAttributes
 }) {
   const {
-    content
+    content,
+    videoID,
+    editingMode
   } = attributes;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, {
@@ -49,9 +51,9 @@ function Edit({
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
           icon: "edit",
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Edit", "first-block"),
-          onClick: () => {
-            alert("Edit button clicked!");
-          }
+          onClick: v => setAttributes({
+            editingMode: !editingMode
+          })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
           icon: "trash",
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Delete", "first-block"),
@@ -80,10 +82,14 @@ function Edit({
         initialOpen: false,
         icon: "admin-generic",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enter Text", "first-block"),
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enter Video ID", "first-block"),
+          value: videoID,
           onChange: v => {
-            console.log("Text changed:", v);
-          }
+            setAttributes({
+              videoID: v
+            });
+          },
+          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enter the YouTube video ID to embed the video.", "first-block")
         })
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
@@ -106,9 +112,9 @@ function Edit({
           console.log("Something Visible");
         }
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
       ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
-        className: "dummy-custom-block",
+        className: "youtube-video-block",
         style: {
           backgroundColor: "#f6f689",
           padding: "20px",
@@ -116,7 +122,7 @@ function Edit({
           borderRadius: "25px"
         }
       }),
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
           tagName: "h2",
           value: content,
@@ -128,7 +134,38 @@ function Edit({
           placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enter your text here", "first-block"),
           allowedFormats: ["core/bold", "core/italic"]
         })
-      })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        children: editingMode ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Placeholder, {
+          icon: "video-alt3",
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enter Video ID", "first-block"),
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+            value: videoID,
+            onChange: v => {
+              setAttributes({
+                videoID: v
+              });
+            },
+            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enter the YouTube video ID to embed the video.", "first-block")
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+            onClick: () => {
+              setAttributes({
+                editingMode: false
+              });
+            },
+            variant: "primary",
+            children: "Embed Video"
+          })]
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("iframe", {
+          width: "560",
+          height: "315",
+          src: `https://www.youtube.com/embed/${videoID}`,
+          title: "YouTube video player",
+          frameborder: "0",
+          allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+          referrerpolicy: "strict-origin-when-cross-origin",
+          allowfullscreen: true
+        })
+      })]
     })]
   });
 }
@@ -166,6 +203,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_4__.name, {
+  icon: {
+    src: "video-alt3",
+    foreground: "#f00"
+  },
   /**
    * @see ./edit.js
    */
@@ -198,16 +239,26 @@ function save({
   attributes
 }) {
   const {
-    content
+    content,
+    videoID
   } = attributes;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
       ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save(),
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.RichText.Content, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.RichText.Content, {
         tagName: "h2",
         value: content
-      })
-    })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("iframe", {
+        width: "560",
+        height: "315",
+        src: `https://www.youtube.com/embed/${videoID}`,
+        title: "YouTube video player",
+        frameborder: "0",
+        allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+        referrerpolicy: "strict-origin-when-cross-origin",
+        allowfullscreen: true
+      })]
+    }), "Save"]
   });
 }
 

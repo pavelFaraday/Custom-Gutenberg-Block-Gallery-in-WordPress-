@@ -1,17 +1,20 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "create-block/first-block",
+	"name": "create-block/youtube-video",
 	"version": "0.1.0",
-	"title": "First Block",
+	"title": "Youtube Video",
 	"category": "media",
 	"icon": "admin-plugins",
-	"description": "Code is poetry",
+	"description": "Youtube embed Video",
 	"example": {},
 	"attributes": {
-		"content": {
-			"type": "string",
-			"default": "Hello World"
+		"videoID": {
+			"type": "string"
+		},
+		"editingMode": {
+			"type": "boolean",
+			"default": true
 		}
 	},
 	"supports": {
