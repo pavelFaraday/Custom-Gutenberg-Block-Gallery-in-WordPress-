@@ -4,7 +4,7 @@
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, RichText } from "@wordpress/block-editor";
 
 /**
  * The save function defines the way in which the different attributes should
@@ -15,10 +15,21 @@ import { useBlockProps } from '@wordpress/block-editor';
  *
  * @return {Element} Element to render.
  */
-export default function save() {
+export default function save({ attributes }) {
+	const { heading, description, image } = attributes;
+
 	return (
-		<p { ...useBlockProps.save() }>
-			{ 'Simple Card – hello from the saved content!' }
-		</p>
+		<div {...useBlockProps.save()}>
+			{image && image?.url && (
+				<img
+					src={image.url}
+					alt={image.alt}
+					style={{ width: "100%", height: "auto" }}
+				/>
+			)}
+
+			{heading && <RichText.Content tagName="h2" value={heading} />}
+			{description && <RichText.Content tagName="p" value={description} />}
+		</div>
 	);
 }
