@@ -12,6 +12,9 @@
 		"html": false
 	},
 	"attributes": {
+		"BlockStyle": {
+			"type": "string"
+		},
 		"heading": {
 			"type": "string"
 		},

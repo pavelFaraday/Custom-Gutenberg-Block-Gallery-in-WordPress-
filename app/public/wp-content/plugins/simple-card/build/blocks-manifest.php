@@ -17,6 +17,9 @@ return array(
 			'html' => false
 		),
 		'attributes' => array(
+			'BlockStyle' => array(
+				'type' => 'string'
+			),
 			'heading' => array(
 				'type' => 'string'
 			),

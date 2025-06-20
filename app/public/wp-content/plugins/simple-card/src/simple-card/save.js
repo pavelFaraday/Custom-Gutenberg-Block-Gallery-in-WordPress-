@@ -14,7 +14,7 @@ export default function save({ attributes }) {
 		<div
 			{...useBlockProps.save()}
 			style={{
-				backgroundColor: containerBg,
+				// backgroundColor: containerBg,
 				padding: "20px",
 			}}
 		>
@@ -30,14 +30,14 @@ export default function save({ attributes }) {
 				<RichText.Content
 					tagName="h2"
 					value={heading}
-					style={{ color: headingColor }}
+					// style={{ color: headingColor }}
 				/>
 			)}
 			{description && (
 				<RichText.Content
 					tagName="p"
 					value={description}
-					style={{ color: descriptionColor }}
+					// style={{ color: descriptionColor }}
 				/>
 			)}
 		</div>

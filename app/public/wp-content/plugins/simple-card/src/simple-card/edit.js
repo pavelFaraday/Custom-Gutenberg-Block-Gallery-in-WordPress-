@@ -17,6 +17,7 @@ import {
 } from "@wordpress/components";
 
 import "./editor.scss";
+import { useEffect } from "@wordpress/element";
 
 export default function Edit({ attributes, setAttributes }) {
 	const {
@@ -26,7 +27,26 @@ export default function Edit({ attributes, setAttributes }) {
 		headingColor,
 		descriptionColor,
 		containerBg,
+		BlockStyle,
 	} = attributes;
+
+	const customStyle = `
+		.heading {
+			color: ${headingColor};
+		}
+		.description {
+			color: ${descriptionColor}
+		}
+		.wp-block-create-block-simple-card {
+			background-color: ${containerBg};
+	}
+	`;
+
+	useEffect(() => {
+		setAttributes({
+			BlockStyle: customStyle,
+		});
+	}, [headingColor, descriptionColor, containerBg]);
 
 	const COLORS = [
 		{
@@ -116,10 +136,12 @@ export default function Edit({ attributes, setAttributes }) {
 				</PanelBody>
 			</InspectorControls>
 
+			<style>{BlockStyle}</style>
+
 			<div
 				{...useBlockProps()}
 				style={{
-					backgroundColor: containerBg,
+					// backgroundColor: containerBg,
 					padding: "20px",
 				}}
 			>
@@ -158,7 +180,7 @@ export default function Edit({ attributes, setAttributes }) {
 					value={heading}
 					onChange={(v) => setAttributes({ heading: v })}
 					className="heading"
-					style={{ color: headingColor }}
+					// style={{ color: headingColor }}
 				/>
 				<RichText
 					tagName="p"
@@ -166,7 +188,7 @@ export default function Edit({ attributes, setAttributes }) {
 					value={description}
 					onChange={(v) => setAttributes({ description: v })}
 					className="description"
-					style={{ color: descriptionColor }}
+					// style={{ color: descriptionColor }}
 				/>
 			</div>
 		</>
