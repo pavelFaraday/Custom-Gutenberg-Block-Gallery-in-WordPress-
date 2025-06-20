@@ -30,6 +30,15 @@ return array(
 					'alt' => '',
 					'id' => ''
 				)
+			),
+			'headingColor' => array(
+				'type' => 'string'
+			),
+			'descriptionColor' => array(
+				'type' => 'string'
+			),
+			'containerBg' => array(
+				'type' => 'string'
 			)
 		),
 		'textdomain' => 'simple-card',

@@ -5,14 +5,47 @@ import {
 	MediaPlaceholder,
 	BlockControls,
 	MediaUpload,
+	InspectorControls,
 } from "@wordpress/block-editor";
 
-import { ToolbarButton, ToolbarGroup } from "@wordpress/components";
+import {
+	PanelBody,
+	ToolbarButton,
+	ToolbarGroup,
+	ColorPalette,
+	__experimentalHeading as Heading,
+} from "@wordpress/components";
 
 import "./editor.scss";
 
 export default function Edit({ attributes, setAttributes }) {
-	const { heading, description, image } = attributes;
+	const {
+		heading,
+		description,
+		image,
+		headingColor,
+		descriptionColor,
+		containerBg,
+	} = attributes;
+
+	const COLORS = [
+		{
+			name: __("Black", "gutenberg-block-starter"),
+			color: "#000000",
+		},
+		{
+			name: __("White", "gutenberg-block-starter"),
+			color: "#ffffff",
+		},
+		{
+			name: __("Red", "gutenberg-block-starter"),
+			color: "#ff0000",
+		},
+		{
+			name: __("Green", "gutenberg-block-starter"),
+			color: "#00ff00",
+		},
+	];
 
 	return (
 		<>
@@ -53,7 +86,43 @@ export default function Edit({ attributes, setAttributes }) {
 				</BlockControls>
 			)}
 
-			<div {...useBlockProps()}>
+			<InspectorControls>
+				<PanelBody
+					title={__("Card Styles", "gutenberg-block-starter")}
+					initialOpen={true}
+				>
+					<Heading>{__("Heading Color", "gutenberg-block-starter")}</Heading>
+					<ColorPalette
+						colors={COLORS}
+						value={headingColor}
+						onChange={(v) => setAttributes({ headingColor: v })}
+					/>
+					<Heading>
+						{__("Description Color", "gutenberg-block-starter")}
+					</Heading>
+					<ColorPalette
+						colors={COLORS}
+						value={descriptionColor}
+						onChange={(v) => setAttributes({ descriptionColor: v })}
+					/>
+					<Heading>
+						{__("Container Background Color", "gutenberg-block-starter")}
+					</Heading>
+					<ColorPalette
+						colors={COLORS}
+						value={containerBg}
+						onChange={(v) => setAttributes({ containerBg: v })}
+					/>
+				</PanelBody>
+			</InspectorControls>
+
+			<div
+				{...useBlockProps()}
+				style={{
+					backgroundColor: containerBg,
+					padding: "20px",
+				}}
+			>
 				{image && image?.url ? (
 					<img
 						src={image.url}
@@ -89,6 +158,7 @@ export default function Edit({ attributes, setAttributes }) {
 					value={heading}
 					onChange={(v) => setAttributes({ heading: v })}
 					className="heading"
+					style={{ color: headingColor }}
 				/>
 				<RichText
 					tagName="p"
@@ -96,6 +166,7 @@ export default function Edit({ attributes, setAttributes }) {
 					value={description}
 					onChange={(v) => setAttributes({ description: v })}
 					className="description"
+					style={{ color: descriptionColor }}
 				/>
 			</div>
 		</>

@@ -1,25 +1,23 @@
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
 import { useBlockProps, RichText } from "@wordpress/block-editor";
 
-/**
- * The save function defines the way in which the different attributes should
- * be combined into the final markup, which is then serialized by the block
- * editor into `post_content`.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#save
- *
- * @return {Element} Element to render.
- */
 export default function save({ attributes }) {
-	const { heading, description, image } = attributes;
+	const {
+		heading,
+		description,
+		image,
+		headingColor,
+		descriptionColor,
+		containerBg,
+	} = attributes;
 
 	return (
-		<div {...useBlockProps.save()}>
+		<div
+			{...useBlockProps.save()}
+			style={{
+				backgroundColor: containerBg,
+				padding: "20px",
+			}}
+		>
 			{image && image?.url && (
 				<img
 					src={image.url}
@@ -28,8 +26,20 @@ export default function save({ attributes }) {
 				/>
 			)}
 
-			{heading && <RichText.Content tagName="h2" value={heading} />}
-			{description && <RichText.Content tagName="p" value={description} />}
+			{heading && (
+				<RichText.Content
+					tagName="h2"
+					value={heading}
+					style={{ color: headingColor }}
+				/>
+			)}
+			{description && (
+				<RichText.Content
+					tagName="p"
+					value={description}
+					style={{ color: descriptionColor }}
+				/>
+			)}
 		</div>
 	);
 }

@@ -25,6 +25,15 @@
 				"alt": "",
 				"id": ""
 			}
+		},
+		"headingColor": {
+			"type": "string"
+		},
+		"descriptionColor": {
+			"type": "string"
+		},
+		"containerBg": {
+			"type": "string"
 		}
 	},
 	"textdomain": "simple-card",
