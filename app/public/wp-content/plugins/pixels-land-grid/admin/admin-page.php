@@ -59,34 +59,22 @@ $images = $wpdb->get_results("SELECT * FROM $table_name", ARRAY_A);
 
     <div class="plg-form-row">
         <div class="plg-form-field">
-            <label>Start Row<br>
-                <input type="number" name="start_row" required min="1" value="<?= esc_attr($edit_image['start_row'] ?? '') ?>">
-            </label>
+            <p><input type="number" name="start_row" placeholder="Start Row" required min="1" value="<?= esc_attr($edit_image['start_row'] ?? '') ?>"></p>
         </div>
         <div class="plg-form-field">
-            <label>Start Column<br>
-                <input type="number" name="start_col" required min="1" value="<?= esc_attr($edit_image['start_col'] ?? '') ?>">
-            </label>
+            <p><input type="number" name="start_col" placeholder="Start Column" required min="1" value="<?= esc_attr($edit_image['start_col'] ?? '') ?>"></p>
         </div>
         <div class="plg-form-field">
-            <label>Width (cells)<br>
-                <input type="number" name="width_cells" required min="1" value="<?= esc_attr($edit_image['width_cells'] ?? '') ?>">
-            </label>
+            <p><input type="number" name="width_cells" placeholder="Width (cells)" required min="1" value="<?= esc_attr($edit_image['width_cells'] ?? '') ?>"></p>
         </div>
         <div class="plg-form-field">
-            <label>Height (cells)<br>
-                <input type="number" name="height_cells" required min="1" value="<?= esc_attr($edit_image['height_cells'] ?? '') ?>">
-            </label>
+            <p><input type="number" name="height_cells" placeholder="Height (cells)" required min="1" value="<?= esc_attr($edit_image['height_cells'] ?? '') ?>"></p>
         </div>
         <div class="plg-form-field">
-            <label>Image URL<br>
-                <input type="text" name="img_url" required value="<?= esc_attr($edit_image['img_url'] ?? '') ?>">
-            </label>
+            <p><input type="text" name="img_url" placeholder="Image URL" required value="<?= esc_attr($edit_image['img_url'] ?? '') ?>"></p>
         </div>
         <div class="plg-form-field">
-            <label>Link URL<br>
-                <input type="text" name="link_url" required value="<?= esc_attr($edit_image['link_url'] ?? '') ?>">
-            </label>
+            <p><input type="text" name="link_url" placeholder="Link URL" required value="<?= esc_attr($edit_image['link_url'] ?? '') ?>"></p>
         </div>
 
         <div class="plg-form-actions">

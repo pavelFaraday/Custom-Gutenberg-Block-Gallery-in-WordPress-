@@ -29,7 +29,7 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .plg-form-field {
@@ -157,3 +157,8 @@ td a:hover {
     width: auto;
   }
 }
+
+input::placeholder {
+    color: #999;
+    font-style: italic;
+  }
