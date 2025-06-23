@@ -62,9 +62,18 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('pixels-land-style', plugin_dir_url(__FILE__) . 'public/css/style.css');
     wp_enqueue_script('pixels-land-js', plugin_dir_url(__FILE__) . 'public/js/grid.js', ['jquery'], null, true);
 
+
     // Pass image blocks data via wp_localize_script
     global $wpdb;
     $table_name = $wpdb->prefix . 'pixels_land_images';
     $images = $wpdb->get_results("SELECT * FROM $table_name", ARRAY_A);
     wp_localize_script('pixels-land-js', 'PixelsLandData', ['images' => $images]);
+});
+
+// Enqueue styles for admin dashboard
+add_action('admin_enqueue_scripts', function ($hook) {
+    // Ensure styles only load on your plugin's admin page
+    if ($hook === 'toplevel_page_pixels-land-grid') {
+        wp_enqueue_style('pixels-land-admin-style', plugin_dir_url(__FILE__) . 'admin/css/admin-style.css');
+    }
 });

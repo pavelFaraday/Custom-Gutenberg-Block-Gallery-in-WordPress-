@@ -16,9 +16,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['plg_nonce']) && wp_ve
         'img_url' => sanitize_text_field($_POST['img_url']),
         'link_url' => sanitize_text_field($_POST['link_url']),
     ];
-    $wpdb->insert($table_name, $data);
-    echo '<div class="updated"><p>Image block added!</p></div>';
+
+    if (!empty($_POST['edit_id'])) {
+        $edit_id = intval($_POST['edit_id']);
+        $wpdb->update($table_name, $data, ['id' => $edit_id]);
+        echo '<div class="updated"><p>Image block updated!</p></div>';
+    } else {
+        $wpdb->insert($table_name, $data);
+        echo '<div class="updated"><p>Image block added!</p></div>';
+    }
 }
+
 
 // Handle Delete
 if (isset($_GET['delete'])) {
@@ -27,22 +35,45 @@ if (isset($_GET['delete'])) {
     echo '<div class="updated"><p>Image block deleted!</p></div>';
 }
 
+$edit_id = isset($_GET['edit']) ? intval($_GET['edit']) : 0;
+$edit_image = null;
+
+if ($edit_id) {
+    $edit_image = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $edit_id), ARRAY_A);
+}
+
+
 $images = $wpdb->get_results("SELECT * FROM $table_name", ARRAY_A);
 ?>
 
 <h1>Pixels Land Grid Admin</h1>
 
-<h2>Add New Image Block</h2>
+<h2><?= $edit_image ? 'Edit Image Block' : 'Add New Image Block' ?></h2>
+
 <form method="POST">
     <?php wp_nonce_field('plg_save_image', 'plg_nonce'); ?>
-    <p><label>Start Row: <input type="number" name="start_row" required min="1"></label></p>
-    <p><label>Start Column: <input type="number" name="start_col" required min="1"></label></p>
-    <p><label>Width (cells): <input type="number" name="width_cells" required min="1"></label></p>
-    <p><label>Height (cells): <input type="number" name="height_cells" required min="1"></label></p>
-    <p><label>Image URL: <input type="text" name="img_url" required></label></p>
-    <p><label>Link URL: <input type="text" name="link_url" required></label></p>
-    <p><input type="submit" value="Add Image Block"></p>
+
+    <?php if ($edit_image): ?>
+        <input type="hidden" name="edit_id" value="<?= esc_attr($edit_image['id']) ?>">
+    <?php endif; ?>
+
+    <p><label>Start Row: <input type="number" name="start_row" required min="1" value="<?= esc_attr($edit_image['start_row'] ?? '') ?>"></label></p>
+    <p><label>Start Column: <input type="number" name="start_col" required min="1" value="<?= esc_attr($edit_image['start_col'] ?? '') ?>"></label></p>
+    <p><label>Width (cells): <input type="number" name="width_cells" required min="1" value="<?= esc_attr($edit_image['width_cells'] ?? '') ?>"></label></p>
+    <p><label>Height (cells): <input type="number" name="height_cells" required min="1" value="<?= esc_attr($edit_image['height_cells'] ?? '') ?>"></label></p>
+    <p><label>Image URL: <input type="text" name="img_url" required value="<?= esc_attr($edit_image['img_url'] ?? '') ?>"></label></p>
+    <p><label>Link URL: <input type="text" name="link_url" required value="<?= esc_attr($edit_image['link_url'] ?? '') ?>"></label></p>
+
+    <div class="plg-form-actions">
+        <?php if ($edit_image): ?>
+            <a class="plg-cancel-btn" href="<?= admin_url('admin.php?page=pixels-land-grid') ?>">Cancel Edit</a>
+        <?php endif; ?>
+        <input type="submit" class="button button-primary" value="<?= $edit_image ? 'Update Image Block' : 'Add Image Block' ?>">
+    </div>
+
+
 </form>
+
 
 <h2>Existing Image Blocks</h2>
 <table style="width: 100%; border-collapse: collapse;">
@@ -68,7 +99,11 @@ $images = $wpdb->get_results("SELECT * FROM $table_name", ARRAY_A);
                 <td><?= esc_html($img['height_cells']) ?></td>
                 <td><a href="<?= esc_url($img['img_url']) ?>" target="_blank">View</a></td>
                 <td><a href="<?= esc_url($img['link_url']) ?>" target="_blank">Link</a></td>
-                <td><a href="<?= admin_url('admin.php?page=pixels-land-grid&delete=' . intval($img['id'])) ?>" onclick="return confirm('Delete?')">Delete</a></td>
+                <td>
+                    <a href="<?= admin_url('admin.php?page=pixels-land-grid&edit=' . intval($img['id'])) ?>">Edit</a> |
+                    <a href="<?= admin_url('admin.php?page=pixels-land-grid&delete=' . intval($img['id'])) ?>" onclick="return confirm('Delete?')">Delete</a>
+                </td>
+
             </tr>
         <?php endforeach; ?>
     </tbody>
