@@ -1,0 +1,197 @@
+/* Root variables for light/dark theme */
+:root {
+  --bg-light: #ffffff;
+  --bg-dark: #1e1e1e;
+  --cell-light: #f4f4f4;
+  --cell-dark: #2a2a2a;
+  --border-light: #ccc;
+  --border-dark: #444;
+  --text-light: #333;
+  --text-dark: #ccc;
+}
+
+/* Default light theme */
+body[data-theme="light"] {
+  --bg: var(--bg-light);
+  --cell-bg: var(--cell-light);
+  --border: var(--border-light);
+  --text: var(--text-light);
+}
+
+/* Dark theme overrides */
+body[data-theme="dark"] {
+  --bg: var(--bg-dark);
+  --cell-bg: var(--cell-dark);
+  --border: var(--border-dark);
+  --text: var(--text-dark);
+}
+
+/* Basic reset and font */
+body {
+  margin: 0;
+  font-family: "Courier New", monospace;
+  background-color: var(--bg);
+  color: var(--text);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  user-select: none;
+}
+
+#board-wrapper {
+  display: grid;
+  grid-template-columns: 40px auto; /* 40px for row labels, rest for grid */
+  grid-template-rows: 40px auto; /* 40px for col labels, rest for grid */
+  height: calc(100vh - 60px);
+  width: 100vw;
+  background: var(--bg);
+}
+
+/* Corner empty cell */
+.corner-cell {
+  background-color: var(--cell-bg);
+  border: 1px solid var(--border);
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+/* Column labels container */
+#col-labels {
+  display: grid;
+  grid-auto-flow: column;
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  background: var(--cell-bg);
+  border-left: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding-top: 12px;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Row labels container */
+#row-labels {
+  display: grid;
+  grid-auto-flow: row;
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+  background: var(--cell-bg);
+  border-top: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  overflow-y: hidden;
+  padding-left: 10px;
+  user-select: none;
+}
+
+/* Label styles */
+.col-label,
+.row-label {
+  font-size: 10px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10px;
+  width: 10px;
+  line-height: 10px;
+  pointer-events: none;
+}
+
+/* Grid container */
+#grid {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  display: grid;
+  overflow-y: scroll;
+  background: var(--bg);
+  align-content: start;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Each cell */
+/* .grid-cell {
+  width: 10px;
+  height: 10px;
+  border: 0.5px solid var(--border);
+  background-color: var(--cell-bg);
+  transition: background-color 0.3s ease;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  cursor: pointer;
+  box-sizing: border-box;
+}  */
+
+.grid-cell {
+  width: 10px;
+  height: 10px;
+  border: 0.5px solid red;
+  background-color: var(--cell-bg);
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Empty cells hover effect */
+.grid-cell:hover {
+  background-color: rgba(100, 100, 255, 0.2);
+}
+
+/* Active (clicked) empty cells */
+.grid-cell.active {
+  background-color: #88f !important;
+  border-color: #44c !important;
+}
+
+/* Image block cells */
+.grid-cell > a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto; /* enable click on links */
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Images inside grid cells */
+.grid-cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none; /* prevent image from interfering with clicks */
+  user-select: none;
+  border-radius: 1px;
+}
+
+/* Scrollbar styling for grid container (optional) */
+#grid::-webkit-scrollbar {
+  width: 8px;
+}
+
+#grid::-webkit-scrollbar-track {
+  background: var(--cell-bg);
+}
+
+#grid::-webkit-scrollbar-thumb {
+  background-color: var(--border);
+  border-radius: 4px;
+}
+
+/* Optional: style for the theme toggle button if present */
+#theme-toggle {
+  padding: 5px 10px;
+  font-size: 12px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+#theme-toggle:hover {
+  background-color: rgba(100, 100, 255, 0.1);
+}

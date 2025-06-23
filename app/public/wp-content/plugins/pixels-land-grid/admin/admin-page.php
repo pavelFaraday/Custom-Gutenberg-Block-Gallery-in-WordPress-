@@ -1,0 +1,75 @@
+<?php
+if (!current_user_can('manage_options')) {
+    wp_die('Unauthorized');
+}
+
+global $wpdb;
+$table_name = $wpdb->prefix . 'pixels_land_images';
+
+// Handle Add
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['plg_nonce']) && wp_verify_nonce($_POST['plg_nonce'], 'plg_save_image')) {
+    $data = [
+        'start_row' => intval($_POST['start_row']),
+        'start_col' => intval($_POST['start_col']),
+        'width_cells' => intval($_POST['width_cells']),
+        'height_cells' => intval($_POST['height_cells']),
+        'img_url' => sanitize_text_field($_POST['img_url']),
+        'link_url' => sanitize_text_field($_POST['link_url']),
+    ];
+    $wpdb->insert($table_name, $data);
+    echo '<div class="updated"><p>Image block added!</p></div>';
+}
+
+// Handle Delete
+if (isset($_GET['delete'])) {
+    $delete_id = intval($_GET['delete']);
+    $wpdb->delete($table_name, ['id' => $delete_id]);
+    echo '<div class="updated"><p>Image block deleted!</p></div>';
+}
+
+$images = $wpdb->get_results("SELECT * FROM $table_name", ARRAY_A);
+?>
+
+<h1>Pixels Land Grid Admin</h1>
+
+<h2>Add New Image Block</h2>
+<form method="POST">
+    <?php wp_nonce_field('plg_save_image', 'plg_nonce'); ?>
+    <p><label>Start Row: <input type="number" name="start_row" required min="1"></label></p>
+    <p><label>Start Column: <input type="number" name="start_col" required min="1"></label></p>
+    <p><label>Width (cells): <input type="number" name="width_cells" required min="1"></label></p>
+    <p><label>Height (cells): <input type="number" name="height_cells" required min="1"></label></p>
+    <p><label>Image URL: <input type="text" name="img_url" required></label></p>
+    <p><label>Link URL: <input type="text" name="link_url" required></label></p>
+    <p><input type="submit" value="Add Image Block"></p>
+</form>
+
+<h2>Existing Image Blocks</h2>
+<table style="width: 100%; border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Start Row</th>
+            <th>Start Col</th>
+            <th>Width</th>
+            <th>Height</th>
+            <th>Image URL</th>
+            <th>Link URL</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($images as $img): ?>
+            <tr>
+                <td><?= esc_html($img['id']) ?></td>
+                <td><?= esc_html($img['start_row']) ?></td>
+                <td><?= esc_html($img['start_col']) ?></td>
+                <td><?= esc_html($img['width_cells']) ?></td>
+                <td><?= esc_html($img['height_cells']) ?></td>
+                <td><a href="<?= esc_url($img['img_url']) ?>" target="_blank">View</a></td>
+                <td><a href="<?= esc_url($img['link_url']) ?>" target="_blank">Link</a></td>
+                <td><a href="<?= admin_url('admin.php?page=pixels-land-grid&delete=' . intval($img['id'])) ?>" onclick="return confirm('Delete?')">Delete</a></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
