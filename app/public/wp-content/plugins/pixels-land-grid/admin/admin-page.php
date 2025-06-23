@@ -50,29 +50,55 @@ $images = $wpdb->get_results("SELECT * FROM $table_name", ARRAY_A);
 
 <h2><?= $edit_image ? 'Edit Image Block' : 'Add New Image Block' ?></h2>
 
-<form method="POST">
+<form method="POST" class="plg-form-horizontal">
     <?php wp_nonce_field('plg_save_image', 'plg_nonce'); ?>
 
     <?php if ($edit_image): ?>
         <input type="hidden" name="edit_id" value="<?= esc_attr($edit_image['id']) ?>">
     <?php endif; ?>
 
-    <p><label>Start Row: <input type="number" name="start_row" required min="1" value="<?= esc_attr($edit_image['start_row'] ?? '') ?>"></label></p>
-    <p><label>Start Column: <input type="number" name="start_col" required min="1" value="<?= esc_attr($edit_image['start_col'] ?? '') ?>"></label></p>
-    <p><label>Width (cells): <input type="number" name="width_cells" required min="1" value="<?= esc_attr($edit_image['width_cells'] ?? '') ?>"></label></p>
-    <p><label>Height (cells): <input type="number" name="height_cells" required min="1" value="<?= esc_attr($edit_image['height_cells'] ?? '') ?>"></label></p>
-    <p><label>Image URL: <input type="text" name="img_url" required value="<?= esc_attr($edit_image['img_url'] ?? '') ?>"></label></p>
-    <p><label>Link URL: <input type="text" name="link_url" required value="<?= esc_attr($edit_image['link_url'] ?? '') ?>"></label></p>
+    <div class="plg-form-row">
+        <div class="plg-form-field">
+            <label>Start Row<br>
+                <input type="number" name="start_row" required min="1" value="<?= esc_attr($edit_image['start_row'] ?? '') ?>">
+            </label>
+        </div>
+        <div class="plg-form-field">
+            <label>Start Column<br>
+                <input type="number" name="start_col" required min="1" value="<?= esc_attr($edit_image['start_col'] ?? '') ?>">
+            </label>
+        </div>
+        <div class="plg-form-field">
+            <label>Width (cells)<br>
+                <input type="number" name="width_cells" required min="1" value="<?= esc_attr($edit_image['width_cells'] ?? '') ?>">
+            </label>
+        </div>
+        <div class="plg-form-field">
+            <label>Height (cells)<br>
+                <input type="number" name="height_cells" required min="1" value="<?= esc_attr($edit_image['height_cells'] ?? '') ?>">
+            </label>
+        </div>
+        <div class="plg-form-field">
+            <label>Image URL<br>
+                <input type="text" name="img_url" required value="<?= esc_attr($edit_image['img_url'] ?? '') ?>">
+            </label>
+        </div>
+        <div class="plg-form-field">
+            <label>Link URL<br>
+                <input type="text" name="link_url" required value="<?= esc_attr($edit_image['link_url'] ?? '') ?>">
+            </label>
+        </div>
 
-    <div class="plg-form-actions">
-        <?php if ($edit_image): ?>
-            <a class="plg-cancel-btn" href="<?= admin_url('admin.php?page=pixels-land-grid') ?>">Cancel Edit</a>
-        <?php endif; ?>
-        <input type="submit" class="button button-primary" value="<?= $edit_image ? 'Update Image Block' : 'Add Image Block' ?>">
+        <div class="plg-form-actions">
+            <?php if ($edit_image): ?>
+                <a class="plg-cancel-btn" href="<?= admin_url('admin.php?page=pixels-land-grid') ?>">Cancel Edit</a>
+            <?php endif; ?>
+            <input type="submit" class="button button-primary" value="<?= $edit_image ? 'Update Image Block' : 'Add Image Block' ?>">
+        </div>
     </div>
-
-
 </form>
+
+
 
 
 <h2>Existing Image Blocks</h2>
